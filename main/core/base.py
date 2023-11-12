@@ -39,9 +39,11 @@ class Base(object):
             screenSize, 
             displayFlags
             )
+        
 
         # set the text that appears in the title bar of the window
         pygame.display.set_caption('Graphics Window')
+
 
         # determine if main loop is active
         self.running = True
@@ -53,6 +55,11 @@ class Base(object):
 
         # manage user input
         self.input = Input()
+
+        # number of seconds application has been running
+        self.time = 0
+        self.deltaTime = 0
+
 
     # implement by extending class
     def initialize(self):
@@ -67,7 +74,7 @@ class Base(object):
         ## startup ##
         self.initialize()
 
-        ## main loop ##
+        ## main loop ##  (At 60 fps, this runs once every 0.017 secs.)
         while self.running:
 
             ## process input ##
@@ -78,10 +85,15 @@ class Base(object):
             ## update ##
             self.update()
 
+            # seconds since iteration of run loop
+            self.deltaTime = self.clock.get_time() / 1000
+            # increment time application has been running
+            self.time += self.deltaTime
+
             ## render ##
             # display image on screen
+            self.screen.fill((255, 255, 0))
             pygame.display.flip()    # switches which of the double buffers is displayed to the screen and written to.
-
             # pause if necessare to achieve 60 FPS
             self.clock.tick(60)
 
