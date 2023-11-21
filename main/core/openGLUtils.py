@@ -8,7 +8,7 @@ class OpenGLUtils(object):
     def initializeShader(shaderCode, shaderType):
 
         # specify required OpenGL/GLSL version
-        shaderCode = '#version 460\n' + shaderCode
+        shaderCode = '#version 330\n' + shaderCode
 
         # create empty shader object and return reference value
         shaderRef = glCreateShader(shaderType)
